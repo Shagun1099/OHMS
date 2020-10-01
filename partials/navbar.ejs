@@ -1,0 +1,75 @@
+
+<style rel="stylesheet">
+
+.navbar{
+	height:60px;
+}
+
+.navbar-brand{
+	font-size:35px;
+	font-weight:bold;
+	letter-spacing:4px;
+	font-family: 'Ranchers', cursive;
+	margin-right:20px;
+}
+.navbar .navbar-nav{
+	letter-spacing:1px;
+	word-spacing:10px;
+	font-size:28px;
+	font-weight:bold;
+	font-family: 'Ranchers', cursive;
+}
+.navbar-nav a .active{
+	color:black;
+	transform:scale(1.1);
+}
+
+@media only screen and (max-width: 420x), only screen and (max-device-width: 420px) {
+	
+	.navbar{
+	height:100%;
+		padding-top:0px;
+		padding-bottom:0px;
+    }
+
+	.navbar-brand{
+	font-size:30px;
+}
+.navbar .navbar-nav{
+	font-size:23px;
+}
+
+	}
+
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <a class="navbar-brand" href="#"><i class="fas fa-home text-dark"></i> OHMS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-1 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" href="/home">Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+		<li class="nav-item">
+        <a class="nav-link" href="/signup">SignUp</a>
+      </li>
+		<li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Logout</a>
+      </li>
+    </ul>
+    <form class="form-inline my-1 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

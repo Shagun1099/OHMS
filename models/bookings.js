@@ -1,0 +1,41 @@
+var mongoose = require("mongoose");
+
+var bookingsSchema = new mongoose.Schema({
+	
+	name:{
+		type:String,
+		trim:true
+	 },
+	location:{
+	     type:String,
+		required:[true,'A booking must have a location'],
+		trim:true
+    } ,
+	price:{
+		type:String,
+		required:[true,'A booking must have a price limit'],
+		trim:true
+	},
+	option:{
+		type:String
+	},
+	date:{
+		type:Date,
+		required:[true,'A booking must have a date'],
+	},
+	bookingCreatedAt:{
+	    type:Date,
+		default:Date.now()
+    },
+	time:{
+		type:String,
+		required:[true,'A booking must have a time'],
+	},
+	description:{
+	   type:String,
+		required:[true,'A booking must have a description']
+   }
+	
+});
+
+module.exports = mongoose.model("Booking",bookingsSchema);

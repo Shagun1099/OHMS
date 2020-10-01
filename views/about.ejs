@@ -1,0 +1,64 @@
+
+<%- include("../partials/header") %>
+<link rel="stylesheet" href="../about.css">
+
+<!-- <header class="border-bottom border-secondary">
+	<h2><a href="#" style="color:#2b3856;"><i class="fas fa-home text-success"></i> OHMS</a></h2>
+	<nav>
+		<li><a href="/home" style="color:#2b3856;">HOME</a></li>
+		<li><a href="/login" style="color:#2b3856;">Login</a></li>
+		<li><a href="/signup" style="color:#2b3856;">SignUp</a></li>
+		<li><a href="#" style="color:#2b3856;">LogOut</a></li>
+	</nav>
+   </header> -->
+<%- include("../partials/navbar") %>
+<div class="w3-sidebar w3-bar-block w3-border-bottom w2-border hidden-sm" style="width:250px" id="mysideBar">
+   <a href="/home" class="w3-bar-item w3-button w3-hover-blue "><i class="fa fa-home"></i> Home</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue active"><i class="fa fa-envelope"></i> About</a>
+	<a href="/login" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-user"></i> Login</a>
+	<a href="/signup" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-user-plus"></i> SignUp</a>
+	<div class="services">
+    <a href="#" id="navBtnMech" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-car"></i> Mechanic Services</a>
+	<a href="#" id="navBtnPlum" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-wrench"></i> Plumber Services</a>
+	<a href="#" id="navBtnElec" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-charging-station"></i> Electrician Services</a>
+    <a href="#" id="navBtnWifi" class="w3-bar-item w3-button w3-hover-blue"><i class="fab fa-audible "></i> WiFi Services</a>
+	<a href="#" id="navBtnMob" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-mobile-alt"></i>  Mobile Repair</a>
+	<a href="#" id="navBtnCab" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-tv"></i> Cable Services</a>
+    <a href="#" id="navBtnCar" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-hammer"></i> Carpainter services</a>
+	<a href="#" id="navBtnPest" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-spray-can"></i> Pest-Control</a>
+	<a href="#" id="navBtnLaun"class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-tshirt"></i> Laundry services</a>
+    <a href="#" id="navBtnSan" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-ambulance "></i> Sanitisation</a>
+	<a href="#" id="navBtnCle" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-broom"></i> Cleaning service</a>	
+	</div>	
+	<a href="#" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-globe-americas"></i> Support</a>
+	<a href="#" class="w3-bar-item w3-button w3-hover-blue"><i class="far fa-question-circle"></i> FAQs</a>
+	<a href="#" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-phone-alt"></i> Contact</a>
+</div>
+
+
+<video width="1400px" autoplay  onloadedmetadata="this.muted = true" playsinline autoplay muted loop>
+  <source src="../v1.mp4" type="video/mp4">
+  <source src="../v1.ogg" type="video/ogg">
+</video>
+	
+	
+	<hr class="mx-5" style="margin-top:40px;">
+
+<div class="container">
+	<div class="outer">
+		<% services.forEach(function(service){  %>
+		<div id="<%=service.sId%>" class="inner">
+			<img src="<%= service.icon%>"/>
+			<h4><%= service.name%></h4>
+			<p ><%=service.description%></p>
+			</div>
+		<% }); %>
+	</div>
+</div>
+
+<!-- <a href="/home" class="btn btn-lg btn-info">Hurry Up And Join!!!!!</a> -->
+    <%- include("../partials/commentsection") %>
+	<%- include("../partials/footer") %>
+	<script type="text/javascript" src="../about.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>	

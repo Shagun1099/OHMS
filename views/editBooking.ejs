@@ -1,0 +1,247 @@
+<%- include("../partials/header") %>
+<%- include("../partials/navbar") %>
+
+<style rel="stylesheet">
+	body{
+		background: url(https://www.rotemdentalcare.com/wp-content/uploads/sites/33/2015/05/Photo-Dental-A-lifetime-of-Smiles-May-2015.jpg);
+		background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+		background-attachment:fixed;
+		font-family: 'Zilla Slab', serif;
+	}
+	#des{
+		height:200px;
+	}
+	#date{
+		margin-top:0px;
+	}
+	#time{
+		margin-top:0px;
+	}
+	#datelab{
+		margin-bottom:-10px;
+		margin-top:10px;
+	}
+	
+.A {
+	display:flex;
+	flex-direction:column;
+	justify-content:space-between;
+	align-items:center;
+	width:800px;
+	min-width:300px;
+	max-height:2000px;
+	margin-top:100px;
+	padding:50px;
+	margin-left:150px;
+	margin-right:300px;
+	margin-bottom:100px;
+	background-color: rgba(255,255,255,0.8);
+}
+
+.container {
+	text-align:center;
+	font-weight:bold;
+}
+.container h1{
+	text-transform:uppercase;
+}
+.container h5{
+	opacity:0.9;
+}
+
+div .inputArrange{
+	max-width:450px;
+	align-items:center;
+	padding:10px;
+	align-self:center;
+	margin-left:20px;
+	margin-top:0;
+}
+
+.inputArrange input,button,textarea,select{
+	border-radius:10px;
+	margin-top:20px;
+	width:400px;
+}
+
+ .inputArrange a{
+	border-radius:10px;
+	height:45px;
+	font-size:22px;
+	margin-top:20px;
+	border: 1px solid #98afc7;
+	 width:400px;
+	
+}
+.inputArrange textarea{
+	border: 1px solid #98afc7;
+	font-size:20px;
+	padding:10px;
+}
+.inputArrange input{
+	border: 1px solid #98afc7;
+	font-size:20px;
+	padding:10px;
+	height:45px;
+}
+.inputArrange select{
+	border: 1px solid #98afc7;
+	font-size:20px;
+	padding:10px;
+	height:45px;
+}
+.inputArrange button{
+	border: 1px solid #98afc7;
+	font-weight:normal;
+	height:45px;
+	font-size:22px;
+	
+}
+
+div .thnq p{
+	opacity:0.95;
+	font-size:20px;
+	font-weight:bold;
+	font-family: 'Zilla Slab', serif;
+	text-transform:uppercase;
+}
+.inputArrange input:focus,.inputArrange textarea:focus ,.inputArrange select:focus{
+	outline:none;
+	border: 1px solid #616161;
+}
+#on, #of {
+    width: 20px;
+    height: 20px;
+}
+.inputArrange label{
+	font-size:20px;
+	margin:0;
+}
+
+div .des p {
+	margin:10px 5px;
+	padding:5px;
+	background-color:white;
+	color:black;
+	font-family: 'Satisfy', cursive;
+	border: solid #c0c0c0 1px;
+	border-radius:5px;
+	font-size:20px;
+}
+
+@media only screen and (max-width: 400px), only screen and (max-device-width: 400px) {
+	
+	.A {
+	width:auto;
+	margin-top:30px;
+	margin-left:10px;
+	margin-right:10px;
+	padding:0;
+	height:auto;
+	align-self:center;
+}
+	
+	.container{
+		padding:0;
+	}
+	
+	.container h1{
+		font-size:30px;
+		letter-spacing:-1px;
+		width:345px;
+	}
+	
+ div .inputArrange{
+	width:300px;
+	padding-left:0;
+    margin-left:0;
+  }
+
+.inputArrange input,button,textarea,select{
+	margin-left:0;
+	width:300px;
+ }
+
+.inputArrange input{
+	height:50px;
+ }
+.inputArrange select{
+		height:50px;
+	}
+	
+.inputArrange a{
+		height:55px;
+	    width:300px;
+	}
+
+ div .thnq p{
+	margin:0;
+	font-size:18px;
+	padding:0;
+	}	
+.inputArrange button{
+	height:55px;
+	 }
+	
+	.inputArrange label{
+	font-size:15px;
+}
+	div .des p{
+		line-height:95%;
+		padding:10px;
+		width:300px;
+		opacity:0.9;
+		font-size:18px;
+	}
+	
+} 
+</style>
+
+
+<div class="container mx-auto">
+<div class="A  p-5  border border-secondary">
+<h1 class="font-weight-bold">Edit your booking for <%=service.name%>..!!</h1>
+<h5 class="font-weight-bold">Online Home Maintainance Services</h5>
+<img src="<%=service.icon%>" style="{transform:scale(2);}"/>	
+
+	
+<div class="inputArrange">
+<form action='/home/<%=service_id%>/bookings/<%=booking._id%>?_method=PUT' method="POST">
+	<input  type="text" placeholder="Edit Location" name="location">
+	<input  type="text" placeholder="Edit your min Budget" name="price">
+
+	<label id="datelab" for="date" class="text-start" style="font-size:20px;">Edit your favourable date:</label>
+   <input type="date" id="date" name="date">
+   <label for="time" class="text-start" style="font-size:20px;">Edit Your Favourable Time: </label>
+  <input type="time"  id="time" name="time">
+	<label>Edit Payment Method:</label>
+             <input type = "checkbox"
+                 id = "on"
+                 value = "online" />
+             <label for = "on">Online</label>
+             <input type = "checkbox"
+                 id = "of"
+                 value = "offline" />
+             <label for = "of">By Cash</label>
+	<textarea  class="font-weight-bold text-lg text-start"  name="description" rows="4" cols="80" placeholder="Edit description"></textarea>
+	<button type="submit"  class=" btn-info btn-xl  ">Submit Editing </button> 
+	</form>
+	<hr class="mx-auto">
+	<a href="/home" class="btn btn-secondary btn-xl ">Go Back </a>
+	</div>
+	<div class="des">
+		<p>
+			<%=service.description%>
+		</p>
+	</div>
+	<div class="thnq mt-1">
+		<p>
+		ThankYou for choosing the OHMS for your help.We promise to give the best!!!
+	</p>
+	</div>
+	</div>
+</div>	
+	
+<%- include("../partials/footer") %>	

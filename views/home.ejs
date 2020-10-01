@@ -1,0 +1,182 @@
+
+
+<%- include("../partials/header") %>
+<link rel="stylesheet" href="../home.css">
+<%- include("../partials/navbar") %>
+	
+<div class="w3-sidebar w3-bar-block w3-border-bottom w2-border hidden-sm" style="width:180px" id="mysideBar">
+
+   <a href="/home" class="w3-bar-item w3-button w3-hover-blue  active"><i class="fa fa-home"></i> Home</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue "><i class="fa fa-envelope"></i> About</a>
+	<a href="/login" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-user"></i> Login</a>
+	<a href="/signup" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-user-plus"></i> SignUp</a>
+	<div class="services">
+    <a href="/about" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-car"></i> Mechanic Services</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-wrench"></i> Plumber Services</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-charging-station"></i> Electrician-ing</a>
+    <a href="/about" class="w3-bar-item w3-button w3-hover-blue"><i class="fab fa-audible "></i> WiFi Services</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-mobile-alt"></i>  Mobile Repair</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-tv"></i> Cable Services</a>
+    <a href="/about" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-hammer"></i> Carpainter-ing</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-spray-can"></i> Pest-Control</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-tshirt"></i> Laundry services</a>
+    <a href="/about" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-ambulance "></i> Sanitisation</a>
+	<a href="/about" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-broom"></i> Cleaning service</a>	
+	</div>	
+	<a href="#" class="w3-bar-item w3-button w3-hover-blue"><i class="fas fa-globe-americas"></i> Support</a>
+	<a href="#" class="w3-bar-item w3-button w3-hover-blue"><i class="far fa-question-circle"></i> FAQs</a>
+	<a href="#" class="w3-bar-item w3-button w3-hover-blue "><i class="fas fa-phone-alt"></i> Contact</a>
+ </div>
+
+<div id="carouselExampleCaptions" class="carousel slide shadow-lg c1" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner c1-in">
+    <div class="carousel-item c1-item active">
+      <img src="https://i2.wp.com/www.pointblanq.com/wp-content/uploads/2019/05/Professionalcommercialclenaing.jpg?fit=1600%2C650&ssl=1" class="d-block w-100" alt="..."> 
+      <div class="carousel-caption d-none d-md-block mb-5">
+        <h2 >Online Home Maintainance services</h2>
+        <p class="mb-5">We got what you Want!!!</p>
+      </div>
+    </div>
+    <div class="carousel-item c1-item">
+      <img src="https://lms.logonback2life.eu/moodle/pluginfile.php/1/theme_lambda/slide1image/1576748284/road220058.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 >Online Home Maintainance services</h2>
+        <p>E and E home maintainance service on your doorsteps!!</p>
+      </div>
+    </div>
+    <div class="carousel-item c1-item">
+      <img src="https://devgroupind.com/wp-content/uploads/2020/05/building_maintenance_slide1.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block ">
+      <h2>Online Home Maintainance services</h2>
+        <p >Unbelievable Prices,just affordable range!!</p>
+      </div> 
+    </div>
+  </div>
+  <a class="carousel-control-prev " href="#carouselExampleCaptions" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next " href="#carouselExampleCaptions" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+	</div>
+
+<hr class="mx-5 mt-3">
+
+<div class="jumbotron shadow-lg">
+  <h1 class="display-4"><i class="fas fa-home text-info"></i>OHMS</h1>
+  <p id="jumboHeadP" class="lead text-dark">Looking for the best services around the city?? We have them right at your doorsteps!!!!</p>
+  <hr class="my-4">
+  <p>Here you will get any kind of home services ,with the best experience you've ever had in you life with the most affordable prices.With an average of 10 years' experience, all of our home improvement professionals know exactly what to look for and how to fix it. From replacing grout in the bathroom to installing a fan in the attic, let us tackle the small and large projects on your list.If you wanna know more,click the button right below!!</p>
+  <a class="btn btn-outline-info btn-lg" href="/about" role="button">Learn more</a>
+</div>
+
+<hr class="mx-5 mt-3">
+
+<div class="cardsflex">
+<% services.forEach(function(service){  %>
+<div class="card shadow-lg " style="@media (min-width: 600px){width: 18rem;}">
+  <img src="<%= service.image%>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><%= service.name%></h5>
+    <p class="card-text"><%=service.shortDescription%></p>
+    <a href="/home/<%=service._id %>" class="btn btn-danger shadow-lg btn-lg">Get the Service!!</a>
+  </div>
+	</div>
+<% }); %>
+</div>
+
+<div class="container">
+        <div class="row p-3">
+            <div class="col-sm-6">
+                <div class="home-customer-section customer">
+                    <h2><i class="fa fa-2x fa-user text-info"></i> HEY CUSTOMER!</h2>
+                    <ol>
+	<li>
+	<h5>One Stop Service for all Your Home Needs</h5>
+	</li>
+	<li>
+	<h5>Signup at our site to use our services</h5>
+	</li>
+	<li>
+	<h5>Search Services like repair, replace, Home services etc</h5>
+	</li>
+	<li>
+	<h5>Choose a Service and Book a Service Request Online</h5>
+	</li>
+	<li>
+	<h5>In App Chat With Provider and Status Updates all time</h5>
+	</li>
+	<li>
+	<h5>Provider Completes Your Request in Time</h5>
+	</li>
+	<li>
+	<h5>Do an Electronic payment or pay by Cash and rate service</h5>
+	</li>
+	<li>
+	<h5>Check All Your Service Requests at Your DashBoard</h5>
+	</li>
+   </ol>
+     <a href="/signup" class="btn btn-lg btn-info">Signup <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+    </div>
+    </div>
+    <div class="col-sm-6">
+     <div class="home-customer-section provider">
+    <h2> <i class="fa fa-2x fa-user text-info"></i> HEY PROVIDER!</h2>
+    <ol>
+	<li>
+	<h5>Register using any of PC/Laptop or download OHMS app from playstore</h5>
+	</li>
+	<li>
+	<h5>Update Your Profile and List All Your Services that You Offer</h5>
+	</li>
+	<li>
+	<h5>Schedule Your availability as and When You Want</h5>
+	</li>
+	<li>
+	<h5>You can Confirm or Reject a Service Request any time</h5>
+	</li>
+	<li>
+	<h5>In App Messaging With Customer is always Possible</h5>
+	</li>
+	<li>
+	<h5>Attend The Service Requests</h5>
+	</li>
+	<li>
+	<h5>Complete Service Request and get Paid</h5>
+	</li>
+	<li>
+	<h5>Track All Your Earnings and Requests at DashBoard</h5>
+	</li>
+</ol>
+
+                   <a href="/signup" class="btn btn-lg btn-info">Signup <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="girl">
+	<div class="girltext float-right p-4">
+	<h1>How OHMS Works???</h1>
+	<p>Registered Customers, who are looking to find a near by service can search for providers at OHMS website/app</p>
+	<p>The system displays a list of taskers that are qualified to do your job by providing all other information such as hourly rates, experience, etc</p>
+	<p>Choose the best available Tasker that you find most appropriate to do your work.</p>
+	<p>The tasker can accept or cancel the job as per his/her availability and convenience</p>
+	<p>Once the tasker completes his Job, Payment can happen securely online as well as offline by paying Cash.</p>
+	<a class="btn btn-success btn-md" href="#">VIEW!</a>	
+	</div>
+	<img style="width:100%;height:auto;" src="../girl.jpg" alt="Just a sec,their must be some problem in fetching the image!!!!">
+</div>
+
+<%- include("../partials/commentsection") %>
+
+
+<%- include("../partials/footer") %>
+<script type="text/javascript" src="../home.js"></script>

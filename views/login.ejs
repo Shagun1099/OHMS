@@ -1,0 +1,28 @@
+
+<%- include("../partials/header") %>
+<link rel="stylesheet" href="../forms.css">		
+
+    <div class="container">
+    <div class="A p-5  border border-secondary ">
+    <h1 class=' display-1 text-center'> Login!</h1>
+	<p> Login to your  account on OHMS!!! And get ready for awesome Services!!</p>		
+	<div class="inputArrange">	
+    <form action='/login' method='POST'>
+	<input  type="text" placeholder="Enter Name" name="username">
+	<input  type="text" placeholder="Enter Phone Number" name="phone">
+    <input type="text"  placeholder="Enter Password" name="password">
+    <button class=" btn-info btn-xl  ">Submit </button>
+		
+		<hr class="mx-auto"> 
+	</form>
+    <a href="/signup" class="btn btn-danger btn-xl  ">New User? SignUp! </a> <br>
+    <a href="/home" class="btn btn-secondary btn-xl  ">Go Back!!</a>
+	</div>
+</div>
+	</div>
+	
+	
+	<%- include("../partials/footer") %>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>	

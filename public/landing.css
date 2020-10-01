@@ -1,0 +1,270 @@
+body {
+	/* background-image:url(https://www.desktopbackground.org/download/1280x960/2010/10/03/89696_full-hd-1080p-interior-wallpapers-hd-desktop-backgrounds_1920x1080_h.jpg); 
+	background-image:url(https://cdn.wallpapersafari.com/19/89/cyiAad.jpg);
+	background-image:url(https://thewallpaper.co//wp-content/uploads/2016/10/wallpapers-hd-forest-hd-desktop-wallpapers-amazing-windows-1920x1080.jpg); 
+	box-sizing:border-box;
+	background-size:cover;
+	background-repeat:no-repeat;
+	height:100%;
+	width:100%;*/
+	background-color:#000;
+	font-family: 'Raleway', sans-serif;
+	
+}
+
+slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: -1;
+  animation: imageAnimation 50s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+  background-image: url("../bg1.jpg");
+}
+.slideshow li:nth-child(2) { 
+  background-image: url("../bg2.jpg");
+  animation-delay: 10s; 
+}
+.slideshow li:nth-child(3) { 
+  background-image: url("../bg3.jpg");
+  animation-delay: 20s; 
+}
+.slideshow li:nth-child(4) { 
+  background-image: url("../bg4.jpg");
+  animation-delay: 30s; 
+}
+.slideshow li:nth-child(5) { 
+  background-image: url("../bg5.jpg");
+  animation-delay: 40s; 
+}
+
+@keyframes imageAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 0.5;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  30% {
+    opacity: 0;
+  }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+    opacity: 1;
+}
+
+header h2{
+	font-size:60px;
+	color:white;
+	font-weight:normal;
+	text-shadow: 2px 2px 4px #000000;
+	
+}
+header nav{
+	list-style:none;
+	display:flex;
+	margin-right:-15px;
+	
+}
+
+header nav li{
+	margin: 0 15px;
+	font-size:30px;
+	font-weight:normal;
+	color:white;
+	opacity:1;
+	text-shadow: 4px 2px 6px #000000;
+	
+}
+
+
+header nav li a:hover{
+	color:#1874CD;
+	text-decoration:underline;
+	transform:translatex(5px);
+	font-size:40px;
+	}
+
+header{
+    margin-top:10px;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	padding:30px 100px 0;
+	animation: 1s fadein 0.5s forwards;
+	opacity:0;
+	
+	
+}
+@keyframes fadein{
+	100%{
+		opacity:1;
+	}
+}
+
+h1{ 
+	margin-left:40px;
+	margin-top:300px;
+	padding:10;
+	text-align:center;
+	font-weight:normal;
+    color:#fcfcfc;
+	font-size:100px;
+	animation:1s fadein 0.5s forwards;
+	text-shadow: 4px 4px 8px #000000;
+	letter-spacing:-2px;
+	font-family: 'Ranchers', cursive;
+	
+}
+
+#come{
+	color:#6d7b8d;
+	font-size:120px;
+	text-shadow: 4px 4px 8px #3d3c3a;
+}
+
+p{
+	font-size:40px;
+	margin: 0 200px;
+	color:#fcfcfc;
+	text-shadow:2px 2px 4px #000000;
+	text-align:center;
+	font-weight:normal;
+	letter-spacing:0.6;
+	
+}
+
+div a{
+	font-size:80px;
+	text-align:center;
+	align-self:center;
+	opacity:1;
+	animation: 8s btnSpin 1s ease-in; 
+	animation-iteration-count:infinite;
+	transform:scale(2);
+	margin-top:50px;
+	margin-left:500px;
+	
+	}
+
+.container{
+	margin:0 auto;
+	padding:10px;
+}
+
+@keyframes btnSpin{
+	10%{
+		transform:rotate(360deg);
+	}
+	20%{
+		transform:rotate(720deg);
+	}
+	40%{
+		transform:scale(3);
+	}
+    50%{
+		transform: rotate(-10deg);
+	}
+	60%{
+		transform: rotate(10deg);
+	}
+	70%{
+		transform: rotate(-10deg) scale(2);
+	}
+	80%{
+		transform: rotate(10deg) scale(2);
+	}
+	
+	
+
+}
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+	
+	header{
+		display:flex;
+		flex-direction: column;
+		justify-content:center;
+		align-items:center;
+		font-size:140%;
+		margin: 0 50px;
+	}
+	header h2{
+		font-size:80px;
+	}
+	header li a{
+		font-size:50px;
+		opacity:0.75;
+	}
+	header nav li a:hover{
+	opacity:1;	
+	text-decoration:underline;
+	transform:translatex(5px);
+	font-size:60px;
+   }
+
+
+	div a{
+		margin-bottom:30px;
+		margin-left:300px;
+		align-self:center;
+		font-size:100%;
+		transform:scale(3);
+		margin-top:100px;
+		}
+	
+	h1{
+		margin-top:600px;
+		margin-left:0;
+		margin-right:0;
+		font-size:120px;
+		letter-spacing:-3px;;
+	}
+	
+	#come{
+		font-size:150px;
+	}
+	p{
+		margin:0;
+		font-weight:normal;
+		font-size:50px;
+		letter-spacing:1;
+	}
+
+}
+
+
+
+
+
+
+
+
+

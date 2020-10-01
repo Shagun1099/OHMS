@@ -1,0 +1,132 @@
+     body{
+	background: url(https://www.theheldrich.com/i/SITE_170519_15562383_KX17Z/content/CMS_05222017_104058617_T2WTX/B1A7C54F-F94D-E766-E5EC0E19D7DDC935.JPG)center center /*/ cover repeat */;
+	font-family: 'Zilla Slab', serif;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+}
+
+.outer{
+	width:auto;
+	min-width:300px;
+	background-color: rgba(255,255,255,0.85);
+	margin:100px auto;
+	border: solid 1px #ffffff;
+	padding:20px;
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+	align-items:center;
+}
+.outer h1{
+	text-transform:uppercase;
+	margin:20px auto 0px auto;
+	opacity:0.95;
+	font-size:40px;
+	font-weight:bold;
+}
+
+.subservicesFlex{
+	padding:20px;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-around;
+	align-items:center;
+	flex-wrap:wrap;
+}
+
+.subservicesFlex div {
+  flex: 0 0 26%;
+}
+.subserviceCard{
+	padding:10px;
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+	align-items:center;
+	min-width:300px;
+	min-height:280px;
+	margin: 20px auto;
+}
+
+.subserviceCard img{
+	border-radius:50%;
+	border:solid 2px #000000;
+	width:200px;
+	height:200px;
+}
+.subserviceCard img:hover{
+	transform:scale(1.1);
+}
+.subserviceCard h5{
+	font-weight:bold;
+	font-size:30px;
+	opacity:0.9;
+}
+.subserviceCard p{
+	font-weight:bold;
+	font-size:25px;
+	color:#ff0000;
+}
+.outer a{
+	border-radius:10px;
+	height:45px;
+	font-size:22px;
+	border: 1px solid #98afc7;
+	 width:400px;
+	margin-bottom:20px;
+	padding-bottom:10px;
+}
+ div .thnq p{
+	opacity:0.95;
+	font-size:20px;
+	font-weight:bold;
+}
+
+@media only screen and (max-width: 400px), only screen and (max-device-width: 400px) {
+	
+	body{
+		/*background:url(https://i.pinimg.com/originals/a5/b6/6f/a5b66fb12f08f3f22f288691e83e483a.jpg)center center; */
+		background:url(https://image.freepik.com/free-photo/cheerful-girl-winking-smiling-while-showing-victory-sign_158595-4358.jpg)center center;
+		background-size:cover;
+	    background-repeat:no-repeat;
+	     background-attachment:fixed;
+	}
+	.outer{
+	background-color: rgba(255,255,255,0.6);
+	margin:0px auto;
+	height:auto;	
+  }
+	.outer h1{
+		font-size:30px;
+		margin:none;
+	}
+	
+	.outer a{
+			height:55px;
+	    width:300px;
+	}
+ div .thne p{
+	margin:0;
+	font-size:17px;
+	padding:0;
+	}
+.subservicesFlex{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+	align-items:center;
+	padding-top:none;
+}
+.subserviceCard{
+	min-width:300px;
+    height:280px;
+}
+.subserviceCard img{
+	width:180px;
+	height:180px;
+}	
+	
+	
+	
+}

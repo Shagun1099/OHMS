@@ -1,0 +1,35 @@
+<%- include("../partials/header") %>
+<link rel="stylesheet" href="../subServices.css">
+<%- include("../partials/navbar") %>
+
+<% var subservices = service.subServices %>
+
+<div class="container mx-auto outer">
+<div>
+<h1>Continue with your <%=service.name%>..</h1>	
+	</div>		
+<div class="subservicesFlex">
+<% subservices.forEach(function(subservice){   %>
+	       <div class="subserviceCard" >
+			<img src="<%=subservice.image%>">  
+			<h5><%=subservice.name%></h5>
+			  <p>$<%=subservice.price%> INR only!!</p> 
+	</div>  
+<%	}); %>	
+</div>
+<div>	
+<a href="/home/<%=service._id%>/bookingform" class="btn btn-info btn-lg ">Book Now!!</a> 	
+</div>
+<div>	
+<a href="/home" class="btn btn-secondary btn-lg ">Go Back!!!</a> 	
+</div>
+<div>	
+<a href="/home/<%=service._id%>/bookings" class="btn btn-primary btn-lg ">See your Bookings!!</a> 	
+</div>
+		
+<div class="thnq">
+	<p class="thnq">ThankYou for choosing the OHMS for your help.We promise to give the best!!!</p>
+	</div>	
+</div>
+
+<%- include("../partials/footer") %>

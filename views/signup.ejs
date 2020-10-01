@@ -1,0 +1,46 @@
+
+<%- include("../partials/header") %>
+<link rel="stylesheet" href="../forms.css">		
+
+<div class="container">
+<div class="A  p-5  border border-secondary">
+<h1 class=' display-1 text-center'> SignUp</h1>
+<p> Register with a free account on OHMS!!! And get ready for awesome Services!!</p>	
+<div class="inputArrange">
+<form action='/register' method='POST'>
+	<input  type="text" placeholder="Enter Name" name="username">
+	<input  type="text" placeholder="Enter Your Phone No." name="phone">
+    <input  type="text"  placeholder="Enter password" name="password">
+	 <input  type="text"  placeholder="Re-Enter password" name="password">
+	<!-- <div class="g-recaptcha" data-sitekey="6LeNT8oZAAAAACSYoTRiqZt3rg9sCTfHMwqGNMps"></div> -->
+	<div >
+  <table>
+    <tbody>
+      <tr>
+        <h5 class=" ml-2">I'm Signing In as:</h5>
+        <td height="50"><input type="radio" name="customer" id="c" value="1"></td>
+        <td height="50">Customer</td>
+        <td height="50"><input type="radio" name="provider" id="p" value="1"></td>
+        <td height="50">Provider</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+	<button class=" btn-info btn-xl  ">Sign Up </button>
+	
+	<hr class="mx-auto"> 
+		
+	</form>
+    <a href="/login" class=" btn btn-danger btn-xl  ">Existing User? Login! </a> <br>
+    <a href="/home" class=" btn btn-secondary btn-xl  ">Go Back!!</a>
+	
+</div>
+</div>
+	</div>	
+	
+	<%- include("../partials/footer") %>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>	

@@ -6,7 +6,7 @@ const AppError = require('./../utils/appError');
 
 
 // TO GET THE BOOKING FORM
-exports.getBookingForm = catchAsync(async (req, res) => {
+exports.getBookingForm = catchAsync(async (req, res,next) => {
  var id = mongoose.Types.ObjectId(req.params.id); 
   Service.findById(id ,function(err,foundService){
 		if(err){
@@ -20,7 +20,7 @@ exports.getBookingForm = catchAsync(async (req, res) => {
 });
 
 //TO GET ALL BOOKINGS
-exports.getAllBookings = catchAsync(async (req, res) => {
+exports.getAllBookings = catchAsync(async (req, res,next) => {
   var id=mongoose.Types.ObjectId(req.params.id); 
   Service.findById(id).populate("bookings").exec(function(err,foundService){
 	if(err){
@@ -32,7 +32,7 @@ exports.getAllBookings = catchAsync(async (req, res) => {
 });	  
 
 //POST REQUEST TO CREATE A NEW BOOKING
-exports.createBooking = catchAsync(async (req, res) => {
+exports.createBooking = catchAsync(async (req, res,next) => {
  var location=req.body.location;
 	var price=req.body.price;
 	var date=req.body.date;
@@ -63,7 +63,7 @@ exports.createBooking = catchAsync(async (req, res) => {
 });
 
 //REQUEST TO DELETE A BOOKING
-exports.deleteBooking = catchAsync(async (req, res) => {
+exports.deleteBooking = catchAsync(async (req, res,next)=>{
  var id = mongoose.Types.ObjectId(req.params.booking_id);
     //findByIdAndRemove
     Booking.findByIdAndRemove(id, function(err){
@@ -99,7 +99,7 @@ exports.editBooking=catchAsync(async (req,res) =>{
 });
 
 // POST REQUEST FORM UPDATING A BOOKING
-exports.updateBooking = catchAsync(async(req,res) =>{
+exports.updateBooking = catchAsync(async(req,res,next) =>{
 	var id=mongoose.Types.ObjectId(req.params.id);
 	var bookingId =mongoose.Types.ObjectId(req.params.booking_id);
 	var location=req.body.location;

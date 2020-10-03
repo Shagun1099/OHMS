@@ -1,9 +1,11 @@
 const Service = require('./../models/services.js');
 const mongoose = require('mongoose');
+const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/appError');
 
 
-exports.getAllServices = async (req, res) => {
-  try {
+// TO GET ALL THE SERVICES ON THE HOME EPAGE
+exports.getAllServices = catchAsync(async (req, res) => {
    Service.find({},function(err,allServices){
 		if(err){
 			console.log(err);
@@ -12,16 +14,10 @@ exports.getAllServices = async (req, res) => {
 	res.render("home",{services : allServices});
 		}
 	});
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+});
 
-exports.getAllSubServices = async (req, res) => {
-  try {
+// TO GET ALL THE SUB-SERVICES OF A PARTICULAR SERVICE
+exports.getAllSubServices = catchAsync(async (req, res) => {
   var id = mongoose.Types.ObjectId(req.params.id);
 	 Service.findById(id).populate("services").exec(function(err,foundService){
 		if(err){
@@ -32,10 +28,4 @@ exports.getAllSubServices = async (req, res) => {
 			res.render('subServices', {service:foundService});
 		}
 	});
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+});

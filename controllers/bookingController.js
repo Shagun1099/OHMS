@@ -1,10 +1,12 @@
 const Booking = require('./../models/bookings.js');
 const Service = require('./../models/services.js');
 const mongoose = require('mongoose');
-var seedDB     = require("./../seeds");
+const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/appError');
 
-exports.getBookingForm = async (req, res) => {
-  try {
+
+// TO GET THE BOOKING FORM
+exports.getBookingForm = catchAsync(async (req, res) => {
  var id = mongoose.Types.ObjectId(req.params.id); 
   Service.findById(id ,function(err,foundService){
 		if(err){
@@ -15,16 +17,10 @@ exports.getBookingForm = async (req, res) => {
 			res.render('bookingform', {service:foundService});
 		}
 	});
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+});
 
-exports.getAllBookings = async (req, res) => {
-  try {
+//TO GET ALL BOOKINGS
+exports.getAllBookings = catchAsync(async (req, res) => {
   var id=mongoose.Types.ObjectId(req.params.id); 
   Service.findById(id).populate("bookings").exec(function(err,foundService){
 	if(err){
@@ -33,16 +29,10 @@ exports.getAllBookings = async (req, res) => {
 	res.render("bookings",{service:foundService});	 
 		 }	 
 	});	
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }	
-}	  
+});	  
 
-exports.createBooking = async (req, res) => {
-  try {
+//POST REQUEST TO CREATE A NEW BOOKING
+exports.createBooking = catchAsync(async (req, res) => {
  var location=req.body.location;
 	var price=req.body.price;
 	var date=req.body.date;
@@ -70,16 +60,10 @@ exports.createBooking = async (req, res) => {
 	});
 		}
 	});
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+});
 
-exports.deleteBooking = async (req, res) => {
-  try {
+//REQUEST TO DELETE A BOOKING
+exports.deleteBooking = catchAsync(async (req, res) => {
  var id = mongoose.Types.ObjectId(req.params.booking_id);
     //findByIdAndRemove
     Booking.findByIdAndRemove(id, function(err){
@@ -91,16 +75,10 @@ exports.deleteBooking = async (req, res) => {
 		   console.log("booking deleted");
        }
     });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-}
+});
 
-exports.editBooking=async (req,res) =>{
-try{
+//TO SHOW THE EDIT BOOKING FORM
+exports.editBooking=catchAsync(async (req,res) =>{
 	var id = mongoose.Types.ObjectId(req.params.id);
 	var bookingId=req.params.booking_id;
 	 Service.findById(id).populate("bookings").exec(function(err,foundService){
@@ -117,16 +95,11 @@ try{
            }
    });
 		}
-	 });
-} catch(err){
-  res.status(404).json({
-      status: 'fail',
-      message: "what the hell"
-    });	
-}}
+	 }); 
+});
 
-exports.updateBooking = async(req,res) =>{
-try{
+// POST REQUEST FORM UPDATING A BOOKING
+exports.updateBooking = catchAsync(async(req,res) =>{
 	var id=mongoose.Types.ObjectId(req.params.id);
 	var bookingId =mongoose.Types.ObjectId(req.params.booking_id);
 	var location=req.body.location;
@@ -150,12 +123,5 @@ try{
    });	
 	}
 });
-
-}catch(err){
-  res.status(404).json({
-      status: 'fail',
-      message: 'yuppp its me'
-    });		
-}	
 	
-}
+});

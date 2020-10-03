@@ -1,5 +1,7 @@
 var express    = require("express");
 var app        = express();
+const AppError = require('./utils/appError.js');
+const globalErrorHandler = require('./controllers/errorController.js');
 var Service    =require("./models/services.js");
 var Booking    =require("./models/bookings.js");
 var bodyParser = require("body-parser");
@@ -144,9 +146,27 @@ app.get('/signup',function(req,res){
 app.use('/home', homeRouter);
 app.use('/home', bookingRouter);
 
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+}); 
 
-app.listen(3000, function() { 
+app.use(globalErrorHandler);
+
+const server=app.listen(3000, function() { 
   console.log('Server listening on port 3000'); 
   console.log("Ohms app has Started!!!!");	
+});
+
+process.on('uncaughtException', err => {
+  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  process.exit(1);
+});
+process.on('unhandledRejection', err => {
+  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
+  });
 });
 

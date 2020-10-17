@@ -1,4 +1,4 @@
-const AppError = require('./../utils/appError');
+const AppError = require('./../utils/appError.js');
 
 const handleCastErrorDB = err => {
   const message = `Invalid ${err.path}: ${err.value}.`;
@@ -32,9 +32,13 @@ const sendError = (err, res) => {
     console.error('ERROR 💥', err);
 
     // 2) Send generic message
-    res.status(500).json({
+  /*  res.status(500).json({
       status: 'error',
       message: 'Something went very wrong!'
+  });*/
+	    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
   });
   }
 };
@@ -49,8 +53,7 @@ module.exports = (err, req, res, next) => {
 
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (error.name === 'ValidationError')
-      error = handleValidationErrorDB(error);
+    if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
 
     sendError(error, res);
 };

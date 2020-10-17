@@ -3,7 +3,9 @@ const bookingController = require('./../controllers/bookingController');
 
 const router = express.Router();
 
-router.route('/:id([0-9a-fA-F]{24})/bookingform').get(bookingController.getBookingForm);
+router
+.route('/:id/bookingform')
+.get(bookingController.getBookingForm);
 
 router
 .route('/:id([0-9a-fA-F]{24})/bookings')

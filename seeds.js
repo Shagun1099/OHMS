@@ -5,8 +5,8 @@ var data= [
 	{
 		name: "Mechanic service",
 		sId:"mech",
-		icon:"https://img.icons8.com/color/100/000000/traffic-jam.png",
-		image:"https://img.uenicdn.com/image/upload/v1551703077/category/shutterstock_685003078.jpg",
+		icon:"./mechIcon.png",
+		image:"./Mech.jpg",
 		subServices:[
 			{  name:"Bike-Puncher",
 			   image:"https://new-img.patrika.com/upload/2019/08/09/maxresdefault_1_4951544_835x547-m.jpg",
@@ -31,8 +31,8 @@ var data= [
 	{
 		name: "Plumber service",
 		sId:"plum",
-		icon:"https://img.icons8.com/color/100/000000/full-tool-storage-box-.png",
-		image:"https://boatassist.basco.asia/wp-content/uploads/2017/06/Boat-Plumbing-Services.jpg",
+		icon:"./plumIcon.png",
+		image:"./Plum.jpg",
 		subServices:[
 			{  name:"Basin&Sink",
 			   image:"https://c1.wallpaperflare.com/preview/963/82/494/bathroom-clean-faucet-indoors-thumbnail.jpg",
@@ -66,8 +66,8 @@ var data= [
 	{
 		name: "Electrician-ing",
 		sId:"elec",
-		icon:"https://img.icons8.com/color/100/000000/appliances.png",
-		image:"https://hanshawelectricca.com/wp-content/uploads/2020/06/Electrical-Service.jpg",
+		icon:"./elecIcon.png",
+		image:"./Elec.jpg",
 		subServices:[
 			{  name:"Fan",
 			   image:"https://images-na.ssl-images-amazon.com/images/I/41g9qIBH3fL.jpg",
@@ -119,8 +119,8 @@ var data= [
 	{
 		name: "WiFi Services",
 		sId:"wifi",
-		icon:"https://img.icons8.com/color/100/000000/cellular-network--v1.png",
-		image:"https://www.bhatkallys.com/wp-content/uploads/2015/08/7407index.png",
+		icon:"./wifiIcon.png",
+		image:"./WiFi.png",
 		subServices:[
 			{  name:"Installation",
 			   image:"https://www.cybrary.it/wp-content/uploads/2017/06/photodune-2258365-wifi-m.jpg",
@@ -139,8 +139,8 @@ var data= [
 	{
 		name: "Mobile-Repair",
 		sId:"mob",
-		icon:"https://img.icons8.com/color/100/000000/smartphone-tablet.png",
-		image:"https://booklikes.com/upload/post/5/2/523b2a766a0fd0208e349f4bbedf0ee1.jpg",
+		icon:"./mobIcon.png",
+		image:"./Mob.jpg",
 		options:[],
 		shortDescription:"Get the awesome mobile-repair services on your doorsteps,just by one click!!!",
 		description:"OHMS is the best place to get your phone repaired right at your doorstep! To get all details of your phone repair online, all you have to do is download the OHMS app and search for the model of your phone. With the help of our expertly trained technicians, you won’t have to worry about getting your phone repaired at all. "
@@ -148,8 +148,8 @@ var data= [
 	{
 		name: "Cable Services",
 		sId:"cab",
-		icon:"https://img.icons8.com/color/100/000000/watch-tv.png",
-		image:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRfL8GPj6ZpHioFaVbW2wssicGsB8kz6bPpxw&usqp=CAU",
+		icon:"./cabIcon.png",
+		image:"./Cab.jpg",
 		subServices:[
 			{  name:"Installation",
 			   image:"https://timesofindia.indiatimes.com/thumb/msid-67632883,width-400,resizemode-4/67632883.jpg?imglength=124450",
@@ -168,8 +168,8 @@ var data= [
 	{
 		name: "Carpenter-ing",
 		sId:"car",
-		icon:"https://img.icons8.com/color/100/000000/sliding-door-closet.png",
-		image:"https://c.stocksy.com/a/Uaq100/z9/440478.jpg",
+		icon:"./carIcon.png",
+		image:"Car.jpg",
 		subServices:[
 			{  name:"Bed",
 			   image:"https://rukminim1.flixcart.com/image/352/352/jk8lz0w0/bed/g/e/z/queen-na-particle-board-kosmo-mayflower-queen-bed-box-spacewood-original-imaf7mtfdv8hfg6z.jpeg?q=70",
@@ -206,8 +206,8 @@ var data= [
 	{
 		name: "PEST-CONTROL",
 		sId:"pest",
-		icon:"https://img.icons8.com/color/100/000000/ladybird.png",
-		image:"https://img1.pnghut.com/18/18/23/PTH97LhM4j/mosquito-control-mechanical-pest-housefly-pesticide-archery.jpg",
+		icon:"./pestIcon.png",
+		image:"./Pest.jpg",
 		subServices:[
 			{  name:"Cockroach-control",
 			   image:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQlBPKvMykSbOBfCpI1HMTen8pX7080MRgzPA&usqp=CAU",
@@ -238,8 +238,8 @@ var data= [
 	{
 		name: "Laundry Services",
 		sId:"laun",
-		icon:"https://img.icons8.com/color/100/000000/womens-pajama.png",
-		image:"https://static.wixstatic.com/media/8b7853_5387ca9cfe734c48b20e128cf69e825e~mv2.jpg/v1/fill/w_560,h_372,al_c,q_80,usm_0.66_1.00_0.01/Ironing%20Service%20in%20Chippenham.webp",
+		icon:"./launIcon.png",
+		image:"./Laun.jpg",
 		subServices:[
 			{  name:"Washing",
 			   image:"https://1stsourceservall.files.wordpress.com/2017/06/41796599_s.jpg?w=450",
@@ -264,8 +264,8 @@ var data= [
 	{
 		name: "SANITISATION",
 		sId:"san",
-		icon:"https://img.icons8.com/color/100/000000/ambulance.png",
-		image:"https://elight.com/wp-content/uploads/2020/05/school-sanitising-625x400.jpg",
+		icon:"./sanIcon.png",
+		image:"./San.jpg",
 		subServices:[
 			{  name:"Home",
 			   image:"https://assets1.chainstoreage.com/styles/primary_articles_short/s3/2020-03/Sanitize_1.jpg?itok=PN-bsGO2",
@@ -284,8 +284,8 @@ var data= [
 	{
 		name: "Cleaning service",
 		sId:"cle",
-		icon:"https://img.icons8.com/color/100/000000/broom-with-a-lot-of-dust.png",
-		image:"https://www.hydro-clean.net/images/inner-pages/professional-grout-cleaning-equipment.jpg",
+		icon:"./cleIcon.png",
+		image:"./Cle.jpg",
 		subServices:[
 			{  name:"Home",
 			   image:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTyZ7wJjy20msucytc2xVhGweabM5GFpbIKuQ&usqp=CAU",

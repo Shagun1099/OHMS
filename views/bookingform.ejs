@@ -1,3 +1,4 @@
+
 <%- include("../partials/header") %>
 
 <style rel="stylesheet">
@@ -201,8 +202,7 @@ div .des p {
 <div class="A  p-5  border border-secondary">
 <h1 class="font-weight-bold">Continue with your booking for <%=service.name%>..!!</h1>
 <h5 class="font-weight-bold">Online Home Maintainance Services</h5>
-<img src="<%=service.icon%>" style="{transform:scale(2);}"/>	
-
+<img src="<%=service.icon%>" style="{transform:scale(2);}"/>
 	
 <div class="inputArrange">
 <form action='/home/<%=service._id%>/bookings' method="POST">

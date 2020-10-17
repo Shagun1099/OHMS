@@ -14,7 +14,8 @@ var bookingsSchema = new mongoose.Schema({
 	price:{
 		type:String,
 		required:[true,'A booking must have a price limit'],
-		trim:true
+		trim:true,
+	    minlength: [3, 'A booking price must have more or equal then 3 digits']
 	},
 	option:{
 		type:String

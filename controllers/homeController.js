@@ -19,7 +19,7 @@ exports.getAllServices = catchAsync(async (req, res,next) => {
 // TO GET ALL THE SUB-SERVICES OF A PARTICULAR SERVICE
 exports.getAllSubServices = catchAsync(async (req, res,next) => {
   var id = mongoose.Types.ObjectId(req.params.id);
-	 Service.findById(id).populate("services").exec(function(err,foundService){
+	 Service.findById(id,function(err,foundService){
 		if(err){
 			console.log(err);
 			res.redirect("/");

@@ -154,7 +154,7 @@ div .girltext p{
 .card {
 	margin:20px 20px;
 	height:500px;
-	min-width:300px;
+  	min-width:300px; 
 }
 .card h5{
 	font-size:35px;
@@ -243,6 +243,8 @@ div .girltext p{
 	
 	.card{
 		height:450px;
+		margin:10px 10px;
+		width:auto;
 	}
 	.card a{
 		transform:scale(0.8);

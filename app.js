@@ -1,17 +1,58 @@
 var express    = require("express");
-var app        = express();
 const AppError = require('./utils/appError.js');
 const globalErrorHandler = require('./controllers/errorController.js');
 var Service    =require("./models/services.js");
 var Booking    =require("./models/bookings.js");
+//const userRouter = require("./routes/userRoutes.js")
 var bodyParser = require("body-parser");
 //var seedDB     = require("./seeds");
+const dotenv = require('dotenv');
 var methodOverride   = require("method-override");
 const homeRouter = require('./routes/homeRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp'); 
+
+var app  = express();
+dotenv.config({ path: './config.env' });
+
+// 1) GLOBAL MIDDLEWARES
+// Set security HTTP headers
+ app.use(helmet());
+
+// Limit requests from same API
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP, please try again in an hour!'
+});
+app.use('/api', limiter);
+
+// Body parser, reading data from body into req.body
+app.use(express.json({ limit: '100kb' }));
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
+
+// Prevent parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'ratingsQuantity',
+      'price'
+    ]
+  })
+); 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/ohms', {
+mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify:false	
@@ -24,7 +65,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
-app.use(express.static(__dirname + "/images"));
+app.use(express.static(__dirname + "/media"));
 //seedDB();
 
 
@@ -143,16 +184,19 @@ app.get('/signup',function(req,res){
 	    res.render("signup");
 });
 
+
+
 app.use('/home', homeRouter);
 app.use('/home', bookingRouter);
+//app.use('/home/auth',userRouter);
 
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  return next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 }); 
 
 app.use(globalErrorHandler);
 
-const server=app.listen(3000, function() { 
+const server=app.listen(process.env.PORT, function() { 
   console.log('Server listening on port 3000'); 
   console.log("Ohms app has Started!!!!");	
 });
@@ -162,6 +206,7 @@ process.on('uncaughtException', err => {
   console.log(err.name, err.message);
   process.exit(1);
 });
+
 process.on('unhandledRejection', err => {
   console.log('UNHANDLED REJECTION! 💥 Shutting down...');
   console.log(err.name, err.message);
@@ -169,4 +214,6 @@ process.on('unhandledRejection', err => {
     process.exit(1);
   });
 });
+
+
 

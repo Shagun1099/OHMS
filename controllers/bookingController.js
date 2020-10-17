@@ -1,5 +1,5 @@
-const Booking = require('./../models/bookings.js');
 const Service = require('./../models/services.js');
+const Booking = require('./../models/bookings.js');
 const mongoose = require('mongoose');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
@@ -14,7 +14,7 @@ exports.getBookingForm = catchAsync(async (req, res,next) => {
 			res.redirect("/");
 		}else{
 			console.log(foundService.name);
-			res.render('bookingform', {service:foundService});
+			res.render("bookingform.ejs", {service:foundService});
 		}
 	});
 });

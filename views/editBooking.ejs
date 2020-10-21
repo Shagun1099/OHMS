@@ -1,5 +1,5 @@
 <%- include("../partials/header") %>
-<%- include("../partials/navbar") %>
+<%- include("../partials/flash") %>
 
 <style rel="stylesheet">
 	body{
@@ -204,11 +204,11 @@ div .des p {
 <div class="A  p-5  border border-secondary">
 <h1 class="font-weight-bold">Edit your booking for <%=service.name%>..!!</h1>
 <h5 class="font-weight-bold">Online Home Maintainance Services</h5>
-<img src="<%=service.icon%>" style="{transform:scale(2);}"/>	
+<img src="../<%=service.icon%>" style="{transform:scale(2);}"/>	
 
 	
 <div class="inputArrange">
-<form action='/home/<%=service_id%>/bookings/<%=booking._id%>?_method=PUT' method="POST">
+<form action='/<%=service_id%>/bookings/<%=booking._id%>?_method=PUT' method="POST">
 	<input  type="text" placeholder="Edit Location" name="location">
 	<input  type="text" placeholder="Edit your min Budget" name="price">
 

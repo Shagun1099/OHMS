@@ -1,6 +1,7 @@
 
 <%- include("../partials/header") %>
-<link rel="stylesheet" href="../forms.css">		
+<link rel="stylesheet" href="../forms.css">	
+<%- include("../partials/flash") %>
 
     <div class="container">
     <div class="A p-5  border border-secondary ">
@@ -8,13 +9,12 @@
 	<p> Login to your  account on OHMS!!! And get ready for awesome Services!!</p>		
 	<div class="inputArrange">	
     <form action='/login' method='POST'>
-	<input  type="text" placeholder="Enter Name" name="username">
-	<input  type="text" placeholder="Enter Phone Number" name="phone">
+	<input  type="text" placeholder="Enter Name" name="name">
+	<input  type="text" placeholder="Enter Email" name="email">
     <input type="text"  placeholder="Enter Password" name="password">
-    <button class=" btn-info btn-xl  ">Submit </button>
-		
-		<hr class="mx-auto"> 
+    <button type="submit" href="/login" class=" btn-info btn-xl  ">Submit </button>
 	</form>
+	<hr class="mx-auto"> 	
     <a href="/signup" class="btn btn-danger btn-xl  ">New User? SignUp! </a> <br>
     <a href="/home" class="btn btn-secondary btn-xl  ">Go Back!!</a>
 	</div>

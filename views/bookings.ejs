@@ -1,18 +1,21 @@
 <%- include("../partials/header") %>
 <style rel="stylesheet" >
 body{
-		background: url(<%=service.image%>);
-		background-position: center;
+	    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(136,136,136, 0.3)),url(../<%=service.image%>);
+		background-position: center center;
         background-repeat: repeat;
-        background-size: 700px 400px;
-		background-attachment:fixed;
+        background-size: 100%;
+		background-attachment:fixed; 
 		font-family: 'Zilla Slab', serif;
 	}
 
 .A{
-	margin-top:110px;
+	margin-top:90px;
 	margin-bottom:200px;
 	min-height:400px;
+	max-width:850px;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 .B{
@@ -27,6 +30,8 @@ body{
 	width:100%;
 	padding:40px;
 	border-radius:5px;
+	max-height:800px;
+	overflow:hidden;
 }
 
 .B h1{
@@ -63,7 +68,7 @@ div .thnq p{
 	text-transform:uppercase;
 }
 	#createdAt{
-		margin-left:550px;
+		margin-left:350px;
 		margin-right:-20px;
 		font-size:17px;
 	}
@@ -73,6 +78,7 @@ div .thnq p{
 	
 	
 @media only screen and (max-width: 400px), only screen and (max-device-width: 400px) {
+
 	.A{
 	margin:0px 10px 100px 10px;
 	height:auto;
@@ -92,7 +98,7 @@ div .thnq p{
 	opacity:1;
 	font-size:20px;
 }
-	#createdAt{
+#createdAt{
 		margin-left:60px;
 		margin-right:0px;
 	}
@@ -107,10 +113,16 @@ div .thnq p{
 }
 </style>
 <%- include("../partials/navbar") %>
+<%- include("../partials/flash") %>
 
 <div class="A">
+	
 <% service.bookings.forEach(function(booking){ %>
-
+<%if(booking.length<1){ %>
+	<div>
+	<p>no bookings yet on <%=service.name%></p>	
+	</div>	
+<%	}else{ %>	
 <div class="container B">
 <div>
 <h1>Your Booking is Confirmed for <%=booking.name%>!!!!!</h1>
@@ -127,20 +139,20 @@ div .thnq p{
 <hr>	
 </div>
 
-<div class="thnq mt-1">
+<!-- <div class="thnq mt-1">
 <p>ThankYou for choosing the OHMS for your help.We promise to give the best!!!</p>
-</div>
+</div> -->
 <div id="createdAt">
 	<p class="text-danger float-right" > <strong>Booking Created At:</strong><%=booking.bookingCreatedAt.toUTCString().substring(0,29)%></p>	
 </div>	
 <div class="btn-group" role="group">
-<a class="btn btn-lg btn-success mr-2"  href="/home/<%=service._id%>/bookings/<%=booking._id%>/edit">Edit</a>	
-<form  action="/home/<%=service._id%>/bookings/<%=booking._id%>?_method=DELETE" method="POST">	
+<a class="btn btn-lg btn-success mr-2"  href="/<%=service._id%>/bookings/<%=booking._id%>/edit">Edit</a>	
+<form  action="/<%=service._id%>/bookings/<%=booking._id%>?_method=DELETE" method="POST">	
 <button type="submit" class="btn btn-lg btn-danger"><i class="fas fa-trash-alt"></i></button>
 </form>
 </div>	
 </div>
-<% }); %>
+<% }}); %>
 </div>
 
 <%- include("../partials/footer") %>

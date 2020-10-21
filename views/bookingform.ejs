@@ -1,12 +1,13 @@
-
 <%- include("../partials/header") %>
+<%- include("../partials/flash") %>
 
 <style rel="stylesheet">
 	body{
-		background: url(<%=service.image%>);
+		background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(136,136,136, 0.3)),url(../<%=service.image%>);
 		background-position: center;
         background-repeat: repeat;
-        background-size: 700px 400px;
+        background-size: 100%;
+		background-attachment:fixed;
 		font-family: 'Zilla Slab', serif;
 	}
 	#des{
@@ -196,16 +197,16 @@ div .des p {
 	}
 	
 } 
-</style>
-
+</style> 
+<body>
 <div class="container mx-auto">
 <div class="A  p-5  border border-secondary">
 <h1 class="font-weight-bold">Continue with your booking for <%=service.name%>..!!</h1>
 <h5 class="font-weight-bold">Online Home Maintainance Services</h5>
-<img src="<%=service.icon%>" style="{transform:scale(2);}"/>
+<img src="../<%=service.icon%>" style="{transform:scale(2);}" alt="<%=service.name%> Icon"/>
 	
 <div class="inputArrange">
-<form action='/home/<%=service._id%>/bookings' method="POST">
+<form action='/<%=service._id%>/bookings' method="POST">
 	<input  type="text" placeholder="Enter your Location" name="location">
 	<input  type="text" placeholder="Enter your min Budget" name="price">
    <select id="service-option">
@@ -229,7 +230,7 @@ div .des p {
                  value = "offline" />
              <label for = "of">By Cash</label>
 	<textarea  class="font-weight-bold text-lg text-start"  name="description" rows="4" cols="80" placeholder="give some description"></textarea>
-	<button href='/home/<%=service._id%>/bookings' class=" btn-info btn-xl  ">Submit </button> 
+	<button href='/<%=service._id%>/bookings' class=" btn-info btn-xl  ">Submit </button> 
 	</form>
 	<hr class="mx-auto">
 	<a href="/home" class="btn btn-secondary btn-xl ">Go Back </a>
@@ -246,5 +247,6 @@ div .des p {
 	</div>
 	</div>
 </div>	
-	
+</body>
+
 <%- include("../partials/footer") %>	

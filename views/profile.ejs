@@ -1,0 +1,72 @@
+<%- include("../partials/header") %>
+<%- include("../partials/navbar") %>
+<%- include("../partials/flash") %>
+
+<style rel="stylesheet">
+     body{
+    background-color:#ececec; 
+	font-family: 'Commissioner', sans-serif;
+	}
+	.profile-box{
+		display:flex;
+		flex-direction:column;
+		justify-content:space-around;
+		align-items:start;
+		border:1px solid #c9c9c9;
+		border-radius:10px;
+		max-width:500px;
+		max-height:500px;
+		overflow:hidden;
+		margin:100px auto 100px auto;
+		background-color: rgba(255,255,255,0.7);
+		padding:20px;
+	}
+	.profile-box h4{
+		font-size:35px;
+		font-weight:bold;
+		text-transform:uppercase;
+		width:100%;
+		text-align:center;
+	}
+	.profile-box p{
+		font-size:20px;
+	}
+	.profile-box a{
+		width:250px;
+		height:40px;
+		margin:8px;
+		font-size:20px;
+	}
+	@media only screen and (max-width: 400px), only screen and (max-device-width: 400px){
+		.profile-box{
+	    width:auto;
+		margin:50px 10px 100px 10px;
+		padding:20px 0px 20px 0px;
+	}
+	.profile-box p{
+		font-size:18px;
+	}
+	.profile-box h4{
+		font-size:32px;	
+		}
+	.profile-box a{
+		width:250px;
+		height:45px;
+		padding-top:5px;
+		font-size:20px;
+	}
+	}
+</style>
+
+
+<div class="container profile-box">
+	<h4><img src="https://img.icons8.com/officel/32/000000/person-male.png"/>User Profile</h4>
+	<p><strong><img src="https://img.icons8.com/windows/30/000000/collaborator-male.png"/>Name:</strong><%=user.name%></p>
+	<p><strong><img src="https://img.icons8.com/cotton/30/000000/email-open.png"/>Email:</strong><%=user.email%></p>
+	<p><strong><img src="https://img.icons8.com/ultraviolet/28/000000/phone.png"/>Phone:</strong><%=user.phone%></p>
+	<a href="/logout" class="btn btn-secondary">Logout!</a>
+	<a href="#" class="btn btn-danger">Delete My Account!</a>
+	<a href="/home"class="btn btn-primary">Go Home!</a>
+</div>
+
+<%- include("../partials/footer") %>

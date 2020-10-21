@@ -5,8 +5,11 @@ const router = express.Router();
 
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
+router.get('/logout', authController.logout);
 
-router.post('/forgotPassword', authController.forgotPassword);
+router.get('/:id/profile',authController.userProfile);
+
+/*router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
 router.patch(
@@ -27,6 +30,6 @@ router
   .route('/:id')
   .get(authController.getUser)
   .patch(authController.updateUser)
-  .delete(authController.deleteUser);
+  .delete(authController.deleteUser);*/
 
-module.exports = router;
+module.exports = router; 

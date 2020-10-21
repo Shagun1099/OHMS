@@ -4,91 +4,9 @@ const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const mongoose = require('mongoose');
 //const sendEmail = require('./../utils/email');
 
-
-const filterObj = (obj, ...allowedFields) => {
-  const newObj = {};
-  Object.keys(obj).forEach(el => {
-    if (allowedFields.includes(el)) newObj[el] = obj[el];
-  });
-  return newObj;
-};
-
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
-
-  // SEND RESPONSE
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users
-    }
-  });
-});
-
-exports.updateMe = catchAsync(async (req, res, next) => {
-  // 1) Create error if user POSTs password data
-  if (req.body.password || req.body.passwordConfirm) {
-    return next(
-      new AppError(
-        'This route is not for password updates. Please use /updateMyPassword.',
-        400
-      )
-    );
-  }
-
-  // 2) Filtered out unwanted fields names that are not allowed to be updated
-  const filteredBody = filterObj(req.body, 'name', 'email');
-
-  // 3) Update user document
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
-    new: true,
-    runValidators: true
-  });
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      user: updatedUser
-    }
-  });
-});
-
-exports.deleteMe = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, { active: false });
-
-  res.status(204).json({
-    status: 'success',
-    data: null
-  });
-});
-
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!'
-  });
-};
-exports.createUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!'
-  });
-};
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!'
-  });
-};
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!'
-  });
-};
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -104,50 +22,95 @@ const createSendToken = (user, statusCode, res) => {
     ),
     httpOnly: true
   };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
   res.cookie('jwt', token, cookieOptions);
 
   // Remove password from output
   user.password = undefined;
 
-  res.status(statusCode).json({
+ /* res.status(statusCode).json({
     status: 'success',
     token,
     data: {
       user
-    }
-  });
+    } 
+  }); */
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  const newUser = await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm
-  });
-
-  createSendToken(newUser, 201, res);
+	var name= req.body.name,
+        email= req.body.email,
+	    phone=req.body.phone,	
+        password= req.body.password,
+        passwordConfirm=req.body.passwordConfirm;
+  const newUser= {name:name,email:email,phone:phone,password:password,passwordConfirm:passwordConfirm};
+  await User.create(newUser,function(err,newlyCreatedUser){
+	  if(err){
+		  console.log(err);
+		  req.flash("error", err.message);
+          res.redirect("back");
+	  }
+	 else{
+		createSendToken(newlyCreatedUser, 201, res);
+		console.log("A new user signed in:"); 
+		console.log(newlyCreatedUser);
+		req.flash("success", "Your account is successfully created");
+		res.redirect("/"+newlyCreatedUser._id+"/profile") 
+	 } 
+  }); 
 });
 
+exports.userProfile=catchAsync(async(req,res,next)=>{
+	 var id=mongoose.Types.ObjectId(req.params.id); 
+	await User.findById(id,function(err,foundUser){
+	if(err){
+		console.log(err);
+		req.flash("error", err.message);
+		res.redirect("back");
+	}
+		else{
+			res.render("profile",{user:foundUser});
+		}
+								
+	});
+});
 exports.login = catchAsync(async (req, res, next) => {
-  const { email, password } = req.body;
-
+ const {email,password}	=req.body;
   // 1) Check if email and password exist
   if (!email || !password) {
+    req.flash("error", err.message);
+	 res.redirect("back"); 
     return next(new AppError('Please provide email and password!', 400));
   }
   // 2) Check if user exists && password is correct
-  const user = await User.findOne({ email }).select('+password');
+  await User.findOne({email}).select('+password').exec(function(err,foundUser){
+	if(err){
+		console.log(err);
+		req.flash("error", err.message);
+		res.redirect("back");
+	} else{
+		if (!foundUser || !(foundUser.correctPassword(password, foundUser.password))) {
+        return  next(new AppError('Incorrect email or password', 401)); }
+		else{ // 3) If everything ok, send token to client
+		createSendToken(foundUser, 200, res);	
+		console.log("Someone logged in:")	
+		console.log(foundUser);		
+		req.flash("success", " successfully logged in");
+		res.redirect("/"+foundUser._id+"/profile"); 
+		}		
+	}		
+}); 
+ });
 
-  if (!user || !(await user.correctPassword(password, user.password))) {
-    return next(new AppError('Incorrect email or password', 401));
-  }
-
-  // 3) If everything ok, send token to client
-  createSendToken(user, 200, res);
-});
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
+  });
+ req.flash("success","successfully logged out");
+ console.log("Someone logged out");	
+ res.redirect("/home");
+};
 
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) Getting token and check of it's there
@@ -204,7 +167,7 @@ exports.restrictTo = (...roles) => {
   };
 };
 
-exports.forgotPassword = catchAsync(async (req, res, next) => {
+/*exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
@@ -290,3 +253,40 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // 4) Log user in, send JWT
   createSendToken(user, 200, res);
 });
+
+exports.updateMe = catchAsync(async (req, res, next) => {
+  // 1) Create error if user POSTs password data
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(
+      new AppError(
+        'This route is not for password updates. Please use /updateMyPassword.',
+        400
+      )
+    );
+  }
+
+  // 2) Filtered out unwanted fields names that are not allowed to be updated
+  const filteredBody = filterObj(req.body, 'name', 'email');
+
+  // 3) Update user document
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
+    new: true,
+    runValidators: true
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser
+    }
+  });
+});
+
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, { active: false });
+
+  res.status(204).json({
+    status: 'success',
+    data: null
+  });
+});  */

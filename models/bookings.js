@@ -40,3 +40,4 @@ var bookingsSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Booking",bookingsSchema);
+

@@ -1,5 +1,7 @@
 const express = require('express');
 const bookingController = require('./../controllers/bookingController');
+const authController = require('./../controllers/authController');
+
 
 const router = express.Router();
 
@@ -9,8 +11,8 @@ router
 
 router
 .route('/:id([0-9a-fA-F]{24})/bookings')
-.get(bookingController.getAllBookings)
-.post(bookingController.createBooking);
+.get(authController.isLoggedIn,bookingController.getAllBookings)
+.post(authController.isLoggedIn,bookingController.createBooking);
 
 router
 .route('/:id/bookings/:booking_id')	

@@ -90,7 +90,8 @@ exports.login = catchAsync(async (req, res, next) => {
 		res.redirect("back");
 	} else{
 		if (!foundUser || !(foundUser.correctPassword(password, foundUser.password))) {
-        return  next(new AppError('Incorrect email or password', 401)); }
+        req.flash("error","Incorrect Email or Password ,Try Again!!");
+		res.redirect("back");}
 		else{ // 3) If everything ok, send token to client
 		createSendToken(foundUser, 200, res);	
 		console.log("Someone logged in:")	
@@ -166,6 +167,44 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+// Only for rendered pages, no errors!
+exports.isLoggedIn = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    try {
+      // 1) verify token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      // 2) Check if user still exists
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        req.flash("error","You need to be logged in to do that");
+		res.redirect("back");
+      }
+
+      // 3) Check if user changed password after the token was issued
+      if (currentUser.changedPasswordAfter(decoded.iat)) {
+        req.flash("error","It seems like you have changed your password recently. You need to login again!!");
+		res.redirect("back");
+      }
+
+      // THERE IS A LOGGED IN USER
+      res.locals.user = currentUser;
+      return next();
+    } catch (err) {
+     req.flash("error","You need to be logged in to do that");
+	 res.redirect("back"); 
+    }
+  }
+ else{
+	req.flash("error","You need to be logged in to do that");
+	res.redirect("back"); 
+ }
+};
+
 
 /*exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email
@@ -280,13 +319,19 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       user: updatedUser
     }
   });
-});
+}); */
 
-exports.deleteMe = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, { active: false });
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  var id = mongoose.Types.ObjectId(req.params.booking_id);	
+  await  User.findByIdAndRemove(id, function(err){
+       if(err){
+		   console.log(err);
+           res.redirect("back");
+       } else {
+		   req.flash("success", "User successfully removed");
+           res.redirect("/login");
+		   console.log("User Removed from database");
+       }
+    });
+});  
 
-  res.status(204).json({
-    status: 'success',
-    data: null
-  });
-});  */

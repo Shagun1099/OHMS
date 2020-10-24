@@ -9,10 +9,11 @@ var bodyParser           = require("body-parser");
 const flash              = require("connect-flash");
 var session              = require('express-session');
 const dotenv             = require('dotenv');
+const cookieParser       = require('cookie-parser');
 var methodOverride       = require("method-override");
 const homeRouter         = require('./routes/homeRoutes');
 const bookingRouter      = require('./routes/bookingRoutes');
-const userRouter        = require("./routes/userRoutes.js")
+const userRouter         = require("./routes/userRoutes.js")
 /*const rateLimit        = require('express-rate-limit');
 const helmet             = require('helmet');
 const mongoSanitize      = require('express-mongo-sanitize');
@@ -73,6 +74,7 @@ app.use(flash());
 app.use(session({ secret: "once again stiles being the hottest",
                   resave: false, 
                   saveUninitialized: false}));
+app.use(cookieParser());
 //seedDB();
 
 app.use(function(req, res, next){
@@ -81,8 +83,7 @@ app.use(function(req, res, next){
    res.locals.success = req.flash("success");
    next();
 });
-
-
+  
 app.get('/',function(req,res){
 		res.render("landing");
 });
@@ -203,7 +204,6 @@ app.get('/signup',function(req,res){
 app.use('/home', homeRouter);
 app.use('/', bookingRouter);
 app.use('/',userRouter);
- 
 
 app.use(globalErrorHandler);
 
@@ -221,6 +221,7 @@ process.on('uncaughtException', err => {
 process.on('unhandledRejection', err => {
   console.log('UNHANDLED REJECTION! 💥 Shutting down...');
   console.log(err.name, err.message);
+  console.log(err);	
   server.close(() => {
     process.exit(1);
   });

@@ -23,6 +23,12 @@
 	color:black;
 	transform:scale(1.1);
 }
+	span.navbar-text.text-light {
+    font-size: 25px;
+    /* font-weight: bold; */
+    font-family: 'Commissioner', sans-serif;
+    margin-right: 10px;
+}
 
 @media only screen and (max-width: 420x), only screen and (max-device-width: 420px) {
 	
@@ -49,7 +55,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+  <div class="collapse navbar-collapse navbar-right" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-1 mt-lg-0">
       <li class="nav-item">
         <a class="nav-link active" href="/home">Home </a>
@@ -66,16 +72,15 @@
       </li>
 		 <% } else { %>
 		<li class="nav-item">
-        <a class="nav-link" href="#">Signed In As <%= currentUser.name %></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Logout</a>
-      </li>
-		 <% } %>
-    </ul>
-    <form class="form-inline my-1 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search">
-      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-    </form>
+        <a class="nav-link" href="/<%=currentUser._id%>/profile">Profile</a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+       </li>
+	  </ul>
+       <span class="navbar-text text-light">
+        <i class="fas fa-user"></i>Signed In as <%= currentUser.name.split(' ')[0] %>
+       </span>
+	   <% } %>
   </div>
 </nav>

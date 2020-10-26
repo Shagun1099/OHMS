@@ -35,7 +35,14 @@ var bookingsSchema = new mongoose.Schema({
 	description:{
 	   type:String,
 		required:[true,'A booking must have a description']
-   }
+   },
+	creator: {
+		id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        name: String
+	}
 	
 });
 

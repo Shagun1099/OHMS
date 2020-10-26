@@ -1,6 +1,9 @@
 const Service = require('./../models/services.js');
 const Booking = require('./../models/bookings.js');
+const User=require('./../models/userModel.js');
+const { promisify } = require('util');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
@@ -47,24 +50,39 @@ exports.createBooking = catchAsync(async (req, res,next) => {
 			console.log(err);
 			res.redirect("/");
 		}else{
+		const {currentUser} = res.locals;
+		User.findById(currentUser._id,function(err,currentUser){
+			if(err){
+				console.log(err);
+			    res.redirect("/");
+			}else{
+			if (!currentUser) {
+            res.redirect('/back');
+		    req.flash('error',"user belongs to this id do not exist");	
+		     }	
 			var name= foundService.name;
 			var newBooking={name:name,location:location,price:price,date:date,option:option,description:description,time:time};
 			
 		 Booking.create(newBooking,function(err,newlyCreatedBooking){
-		if(err){
+		 if(err){
 			req.flash("error", err.message);
 			res.redirect("back");
 			console.log(err);
-		}else{
+		 }else{
 			 newlyCreatedBooking.save();
              foundService.bookings.push(newlyCreatedBooking);
+			 currentUser.bookings.push(newlyCreatedBooking);
              foundService.save();
+			 currentUser.save({ validateBeforeSave: false });
 			 req.flash("success", "Booking successfully Created");
 			 res.redirect("/"+id+"/bookings");
-		}
+		  }	
+				
+		});
+	  }		
 	});
-		}
-	});
+  }
+});
 });
 
 //REQUEST TO DELETE A BOOKING

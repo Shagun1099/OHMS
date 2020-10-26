@@ -62,14 +62,19 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 exports.userProfile=catchAsync(async(req,res,next)=>{
 	 var id=mongoose.Types.ObjectId(req.params.id); 
-	await User.findById(id,function(err,foundUser){
+	const {currentUser} = res.locals;
+	if (!currentUser) {
+            res.redirect('/back');
+		    req.flash('error',"user belongs to this id do not exist");	
+		     }
+	await User.findById(id).populate('bookings').exec(function(err,foundUser){
 	if(err){
 		console.log(err);
 		req.flash("error", err.message);
 		res.redirect("back");
 	}
 		else{
-			res.render("profile",{user:foundUser});
+			res.render("profile",{user:foundUser,currentUser:currentUser});
 		}
 								
 	});
@@ -110,7 +115,7 @@ exports.logout = (req, res) => {
   });
  req.flash("success","successfully logged out");
  console.log("Someone logged out");	
- res.redirect("/home");
+ res.redirect("/login");
 };
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -182,28 +187,56 @@ exports.isLoggedIn = async (req, res, next) => {
       const currentUser = await User.findById(decoded.id);
       if (!currentUser) {
         req.flash("error","You need to be logged in to do that");
-		res.redirect("back");
+		res.redirect("/login");
       }
 
       // 3) Check if user changed password after the token was issued
       if (currentUser.changedPasswordAfter(decoded.iat)) {
         req.flash("error","It seems like you have changed your password recently. You need to login again!!");
-		res.redirect("back");
+		res.redirect("/login");
       }
 
       // THERE IS A LOGGED IN USER
-      res.locals.user = currentUser;
+      res.locals.currentUser = currentUser;
       return next();
     } catch (err) {
      req.flash("error","You need to be logged in to do that");
-	 res.redirect("back"); 
+	 res.redirect("/login"); 
     }
   }
  else{
 	req.flash("error","You need to be logged in to do that");
-	res.redirect("back"); 
+	res.redirect("/login"); 
  }
 };
+
+exports.hasCurrentUser =  async (req, res, next) => {
+  if (req.cookies.jwt) {
+	 try {
+      // 1) verify token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      // 2) Check if user still exists
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        return next();
+      }
+
+      // THERE IS A LOGGED IN USER
+      res.locals.currentUser = currentUser;
+      return next();
+    } catch (err) {
+      return next();
+    }
+  }
+  else{
+	return next();
+ }
+}
+
 
 
 /*exports.forgotPassword = catchAsync(async (req, res, next) => {
@@ -322,7 +355,11 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 }); */
 
 exports.deleteUser = catchAsync(async (req, res, next) => {
-  var id = mongoose.Types.ObjectId(req.params.booking_id);	
+  var id = mongoose.Types.ObjectId(req.params.id);
+   res.cookie('jwt', 'AccountDeleted', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
+  });	
   await  User.findByIdAndRemove(id, function(err){
        if(err){
 		   console.log(err);

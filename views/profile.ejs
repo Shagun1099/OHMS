@@ -14,10 +14,10 @@
 		align-items:start;
 		border:1px solid #c9c9c9;
 		border-radius:10px;
-		max-width:500px;
-		max-height:500px;
+		max-width:600px;
+		height:auto;
 		overflow:hidden;
-		margin:100px auto 100px auto;
+		margin:50px auto 100px auto;
 		background-color: rgba(255,255,255,0.7);
 		padding:20px;
 	}
@@ -31,11 +31,30 @@
 	.profile-box p{
 		font-size:20px;
 	}
-	.profile-box a,button{
+	.profile-box a,.profile-box button{
 		width:250px;
 		height:40px;
 		margin:8px;
 		font-size:20px;
+	}
+	.booking-card-outer{
+		width:100%;
+		margin:5px;
+		border-radius:5px;
+		padding:5px;
+		background: #a0cfec;
+	}
+	.booking-card-inner{
+		background-color: rgba(255,255,255,0.7);
+		border-radius:5px;
+		border:1px solid #c9c9c9;
+		padding:5px;
+		width:100%;
+		margin-bottom:5px;
+	}
+	.no-booking p{
+		opacity:0.8;
+		font-size:18px;
 	}
 	@media only screen and (max-width: 400px), only screen and (max-device-width: 400px){
 		.profile-box{
@@ -49,12 +68,18 @@
 	.profile-box h4{
 		font-size:32px;	
 		}
-	.profile-box a,button{
+    .profile-box a,.profile-box button{
 		width:250px;
 		height:45px;
 		padding-top:5px;
 		font-size:20px;
 	}
+	.booking-card-outer{
+		width:auto;
+	}
+	.booking-card-inner{
+		padding:5px 0px 5px 5px;
+	}	
 	}
 </style>
 
@@ -64,6 +89,24 @@
 	<p><strong><img src="https://img.icons8.com/windows/30/000000/collaborator-male.png"/>Name:</strong><%=user.name%></p>
 	<p><strong><img src="https://img.icons8.com/cotton/30/000000/email-open.png"/>Email:</strong><%=user.email%></p>
 	<p><strong><img src="https://img.icons8.com/ultraviolet/28/000000/phone.png"/>Phone:</strong><%=user.phone%></p>
+	<div class="booking-card-outer  border-secondary">
+	<p><strong><img src="https://img.icons8.com/cute-clipart/32/000000/bookmark-ribbon.png"/>BOOKINGS:</strong></p>
+	<% user.bookings.forEach(function(booking){ %>
+	 <div class="booking-card-inner">
+	   <li><strong>Type:</strong><%=booking.name%></li>
+	   <li><strong>Venue:</strong><%=booking.location%></li>
+	   <li><strong>Date:</strong><%=booking.date.toUTCString().substring(0,16)%></li>
+	   <li><strong>Time:</strong><%=booking.time%></li>
+	   <li><strong>Expected Price:</strong><%=booking.price%>INR</li>
+	   <li class="text-danger"><strong>Created At:</strong><%=booking.bookingCreatedAt.toUTCString().substring(0,29)%></li>	 
+	</div>
+	<%	}); %>	
+	<%if(user.bookings.length==0){ %>
+	<div class="no-booking">
+	<p>No bookings by you yet!!<img src="https://img.icons8.com/cute-clipart/30/000000/sad.png"/></p>		
+	</div>	
+	<%	} %>
+	</div>
 	<a href="/logout" class="btn btn-secondary">Logout!</a>
 	<form  action="/<%=user._id%>/profile?_method=DELETE" method="POST">
 	<button type="submit" class="btn btn-danger">Delete My Account!</button>

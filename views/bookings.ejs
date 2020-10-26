@@ -74,7 +74,11 @@ div .thnq p{
 	}
 	.fa-trash-alt{
 		color:white;
-	}	
+	}
+	.no-booking p{
+		font-size:22px;
+		opacity:0.99;
+	}
 	
 	
 @media only screen and (max-width: 400px), only screen and (max-device-width: 400px) {
@@ -109,6 +113,14 @@ div .thnq p{
 	opacity:0.8;
 	font-size:16px;
 }
+	.no-booking p{
+		font-size:25px;
+		width:100%;
+		text-align:center;
+	}
+	.no-booking a{
+		margin-left:20px;
+	}
 	
 }
 </style>
@@ -117,12 +129,7 @@ div .thnq p{
 
 <div class="A">
 	
-<% service.bookings.forEach(function(booking){ %>
-<%if(booking.length<1){ %>
-	<div>
-	<p>no bookings yet on <%=service.name%></p>	
-	</div>	
-<%	}else{ %>	
+<% service.bookings.forEach(function(booking){ %>	
 <div class="container B">
 <div>
 <h1>Your Booking is Confirmed for <%=booking.name%>!!!!!</h1>
@@ -152,7 +159,14 @@ div .thnq p{
 </form>
 </div>	
 </div>
-<% }}); %>
+<% }); 
+if(service.bookings.length==0){ %>
+	<div class="container B no-booking">
+	<p class="dispaly-4">No bookings by you yet for the <%=service.name%>!<img src="https://img.icons8.com/cute-clipart/40/000000/sad.png"/></p>
+	<a href="/home/<%=service._id%>" class='btn btn-lg btn-success text-light font-weight-bold'>Wanna make One!!</a>	
+	</div>	
+<% } %>	
+	
 </div>
 
 <%- include("../partials/footer") %>

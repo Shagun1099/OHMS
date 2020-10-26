@@ -52,7 +52,13 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
     select: false
-  }
+  },
+  bookings:[
+		{
+		type:mongoose.Schema.Types.ObjectId,
+	    ref: "Booking"
+	}
+  ]	
 });
 
 userSchema.pre('save', async function(next) {

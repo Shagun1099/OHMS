@@ -5,6 +5,8 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const sharp = require('sharp');
 //const sendEmail = require('./../utils/email');
 
 
@@ -37,13 +39,45 @@ const createSendToken = (user, statusCode, res) => {
   }); */
 };
 
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Not an image! Please upload only images.', 400), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter
+});
+
+exports.uploadUserPhoto = upload.single('photo');
+
+exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+
+  req.file.filename = `user-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+    .resize(500, 500)             
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`media/user/${req.file.filename}`);
+
+  next();
+});
+
 exports.signup = catchAsync(async (req, res, next) => {
 	var name= req.body.name,
         email= req.body.email,
 	    phone=req.body.phone,	
+		role=req.body.role,
         password= req.body.password,
         passwordConfirm=req.body.passwordConfirm;
-  const newUser= {name:name,email:email,phone:phone,password:password,passwordConfirm:passwordConfirm};
+  const newUser= {name:name,email:email,phone:phone,role:role,password:password,passwordConfirm:passwordConfirm};
   await User.create(newUser,function(err,newlyCreatedUser){
 	  if(err){
 		  console.log(err);
@@ -324,6 +358,40 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   // 4) Log user in, send JWT
   createSendToken(user, 200, res);
+}); */
+exports.providerDataForm=catchAsync(async(req,res,next)=>{
+	 var id = mongoose.Types.ObjectId(req.params.id);
+	User.findById(id,function(err,foundUser){
+		if(err){
+			console.log(err);
+			res.redirect("/");
+		}else{
+			res.render("addProviderData", { user_id:foundUser._id});
+		}
+	});
+});	
+
+exports.addProviderData = catchAsync(async(req,res,next)=>{
+	 var id = mongoose.Types.ObjectId(req.params.id);
+	 var location=req.body.location;
+	 var workExperience=req.body.workExperience;
+	 var profession=req.body.profession;
+	 var description=req.body.description;
+	 var user={location:location,workExperience:workExperience,profession:profession,description:description};
+	await User.findByIdAndUpdate(id,user,function(err,updatedUser){
+		if(err){
+		  res.redirect("back");
+		  req.flash("error", err.message);
+		  console.log(err);
+		}else{
+		  console.log(updatedUser);	
+		  req.flash("success", "UPDATED INFORMATION SUCCESSFULLY");
+          res.redirect("/"+id+"/profile" );
+		}
+	})
+	 	 
+	
+	
 });
 
 exports.updateMe = catchAsync(async (req, res, next) => {
@@ -352,7 +420,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       user: updatedUser
     }
   });
-}); */
+}); 
 
 exports.deleteUser = catchAsync(async (req, res, next) => {
   var id = mongoose.Types.ObjectId(req.params.id);

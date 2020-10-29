@@ -1,0 +1,24 @@
+<%- include("../partials/header") %>
+<link rel="stylesheet" href="../forms.css">	
+<%- include("../partials/flash") %>
+
+    <div class="container">
+    <div class="A p-5  border border-secondary ">
+    <h1 class=' display-1 text-center'>Add Details</h1>
+	<p> If You're a Provider,We are gonna need some of your more information.Kindly ensure to submit.Thank You!</p>		
+	<div class="inputArrange">	
+    <form action='/<%=user_id%>/profile?_method=PUT' method="POST">
+	<input  type="text" placeholder="Enter your Location" name="location">
+	<input  type="text" placeholder="Enter your Profession" name="profession">
+    <input type="text"  placeholder="Your work experience in Years" name="workExperience">
+	<textarea  class="font-weight-bold text-lg text-start"  name="description" rows="4" cols="80" placeholder="give short description about yourself in 2 lines.So that we'll be able to help you to find  more customers..."></textarea>
+	<button type="submit" href="/<%=user_id%>/profile" class=" btn-info btn-xl  ">Submit </button>	
+	</form>
+	<hr class="mx-auto"> 	
+    <a href="/home" class="btn btn-secondary btn-xl  ">Go Back!!</a>
+	</div>
+</div>
+	</div>
+	
+	
+	<%- include("../partials/footer") %>

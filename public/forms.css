@@ -28,7 +28,7 @@ div .inputArrange{
 	margin-top:0;
 }
 
-.inputArrange input,button,a{
+.inputArrange input,button,a,textarea{
 	border-radius:10px;
 	margin-top:20px;
 	width:400px;
@@ -56,6 +56,17 @@ div .inputArrange{
 	font-size:22px;
 	
 }
+.inputArrange textarea{
+	border: 1px solid #98afc7;
+	font-size:20px;
+	padding:10px;
+}
+.inputArrange select{
+	border: 1px solid #98afc7;
+	font-size:16px;
+	padding:10px;
+	height:45px;
+}
 
 div p{
 	opacity:0.8;
@@ -76,6 +87,10 @@ h5{
 	margin-top:10px;
 	font-weight:bold;
 	font-size:22px;
+}
+.inputArrange input:focus,.inputArrange textarea:focus ,.inputArrange select:focus{
+	outline:none;
+	border: 1px solid #616161;
 }
 @media only screen and (max-width: 400px), only screen and (max-device-width: 400px) {
 	/*body{
@@ -101,7 +116,7 @@ h5{
     margin-left:0;
   }
 
-.inputArrange input,button,a{
+.inputArrange input,button,a,textarea{
 	margin-left:0;
 	width:300px;
  }
@@ -117,6 +132,9 @@ div button{
 .inputArrange a{
 		height:55px;
 	}
+.inputArrange textarea{
+	font-size:17px;
+}	
 
 div p{
 	margin:0;

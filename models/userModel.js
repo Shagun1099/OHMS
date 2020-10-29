@@ -22,7 +22,9 @@ const userSchema = new mongoose.Schema({
 	 unique:[true,'mobile number should be unique'],
 	 validate:[validator.isMobilePhone,'please provide a valid phone number']
  },	
-  photo: String,
+  photo:{
+	type:String,
+  },
   role: {
     type: String,
     enum: ['user', 'provider', 'admin'],
@@ -58,7 +60,19 @@ const userSchema = new mongoose.Schema({
 		type:mongoose.Schema.Types.ObjectId,
 	    ref: "Booking"
 	}
-  ]	
+  ],
+ 
+   location:String,
+   profession:String,
+   workExperience:{
+	   type:String,
+	   trim:true,
+	   maxlength: [2, 'Work experience must have more or equal then 3 digits']
+   },
+   description:{
+	   type:String,
+	   trim:true
+   }
 });
 
 userSchema.pre('save', async function(next) {

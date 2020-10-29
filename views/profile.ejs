@@ -14,7 +14,7 @@
 		align-items:start;
 		border:1px solid #c9c9c9;
 		border-radius:10px;
-		max-width:600px;
+		max-width:700px;
 		height:auto;
 		overflow:hidden;
 		margin:50px auto 100px auto;
@@ -22,6 +22,16 @@
 		padding:20px;
 	}
 	.profile-box h4{
+		font-size:35px;
+		font-weight:bold;
+		text-transform:uppercase;
+		width:100%;
+		text-align:center;
+		margin-top: -100px;
+        text-shadow: 2px 2px 2px #ffffff;
+        margin-bottom: 50px;
+	}
+	.profile-box h5{
 		font-size:35px;
 		font-weight:bold;
 		text-transform:uppercase;
@@ -52,9 +62,33 @@
 		width:100%;
 		margin-bottom:5px;
 	}
+	.booking-card-inner li{
+		font-size:17px;
+	}
 	.no-booking p{
 		opacity:0.8;
 		font-size:18px;
+	}
+   #providerImage{
+	    height:310px;
+		width:100%;
+	}
+	#providerImage img{
+		height:300px;
+		width:100%;
+	}
+	.text-to-provider{
+	    width:100%;
+		margin:5px;
+		border-radius:5px;
+		padding:5px;
+		background-color: rgba(255,255,255,0.7);
+		border:1px solid #c9c9c9;
+	}
+	.text-to-provider p{
+		font-size:16px;
+		font-weight:bold;
+		opacity:0.8;
 	}
 	@media only screen and (max-width: 400px), only screen and (max-device-width: 400px){
 		.profile-box{
@@ -63,7 +97,7 @@
 		padding:20px 0px 20px 0px;
 	}
 	.profile-box p{
-		font-size:18px;
+		font-size:19px;
 	}
 	.profile-box h4{
 		font-size:32px;	
@@ -80,18 +114,36 @@
 	.booking-card-inner{
 		padding:5px 0px 5px 5px;
 	}	
+	.text-to-provider{
+	    width:auto;
+	}
+	.text-to-provider p{
+		font-size:16px;
+	}	
+	#providerImage{
+	    height:260px;
+	}
+	#providerImage img{
+		height:250px;
+		width:auto;
+		margin-top:-20px;
+	}	
+	.booking-card-inner li{
+		font-size:18px;
+	}	
 	}
 </style>
 
 
 <div class="container profile-box">
-	<h4><img src="https://img.icons8.com/officel/32/000000/person-male.png"/>User Profile</h4>
+	<% if(user.role=='user'){ %>
+	<h5><img src="https://img.icons8.com/officel/32/000000/person-male.png"/>User Profile</h5>
 	<p><strong><img src="https://img.icons8.com/windows/30/000000/collaborator-male.png"/>Name:</strong><%=user.name%></p>
 	<p><strong><img src="https://img.icons8.com/cotton/30/000000/email-open.png"/>Email:</strong><%=user.email%></p>
 	<p><strong><img src="https://img.icons8.com/ultraviolet/28/000000/phone.png"/>Phone:</strong><%=user.phone%></p>
 	<div class="booking-card-outer  border-secondary">
 	<p><strong><img src="https://img.icons8.com/cute-clipart/32/000000/bookmark-ribbon.png"/>BOOKINGS:</strong></p>
-	<% user.bookings.forEach(function(booking){ %>
+	<% user.bookings.forEach(function(booking){ %>	
 	 <div class="booking-card-inner">
 	   <li><strong>Type:</strong><%=booking.name%></li>
 	   <li><strong>Venue:</strong><%=booking.location%></li>
@@ -106,7 +158,41 @@
 	<p>No bookings by you yet!!<img src="https://img.icons8.com/cute-clipart/30/000000/sad.png"/></p>		
 	</div>	
 	<%	} %>
+	</div>	
+	<% } else{ %>
+	<div id="providerImage">
+	<img src='../serviceman.jpg'>	
 	</div>
+	<h4>ServiceMan Profile</h4>
+	<div class="general-information">
+	<p><strong><img  src="https://img.icons8.com/windows/30/000000/collaborator-male.png"/>Name:</strong><%=user.name%></p>
+	<p><strong><img src="https://img.icons8.com/cotton/30/000000/email-open.png"/>Email:</strong><%=user.email%></p>
+	<p><strong><img src="https://img.icons8.com/ultraviolet/28/000000/phone.png"/>Phone:</strong><%=user.phone%></p>	
+	</div>
+	<div class="booking-card-outer  border-secondary">
+	<p><strong><img src="https://img.icons8.com/cute-clipart/32/000000/bookmark-ribbon.png"/>Additional Information:</strong></p>
+	 <div class="booking-card-inner">
+		<% if(user.location==null&&user.workExperience==null&&user.profession==null) { %>
+		 <p>Add your details from the below button:</p>
+		<% }else{ %>
+		 <li><strong>Location:</strong><%=user.location%></li>
+	     <li><strong>Profession:</strong><%=user.profession%></li>
+	     <li><strong>Work Experience:</strong><%=user.workExperience%>Years</li>
+	     <li><strong>your Description:</strong><%=user.description%></li>
+		<% } %>
+	</div>
+	</div>
+	<% if(user.location==null) { %>
+	<a href="/<%=user._id%>/addProviderData" class="btn btn-lg btn-success">Add more Details!</a>	
+	<% }else{ %>
+	<a href="/<%=user._id%>/addProviderData" class="btn btn-lg btn-success">Edit your Details!</a>	
+	<%} %>
+	<div class="text-to-provider">
+		<p>
+			As a servicemen,we hope you realize your responsibilities.We believe that you have hunderd percent faith on us and you are ready to work with us ,with your full diligence and dedication.We expect a lot from you.Please make sure to provide your correct information.Because the customer will only be able to contact your from there.Thankyou for working with us.We are so grateful yo have you.For any information and complaints you can contact to the admin.
+		</p>
+	</div>
+	<%} %>
 	<a href="/logout" class="btn btn-secondary">Logout!</a>
 	<form  action="/<%=user._id%>/profile?_method=DELETE" method="POST">
 	<button type="submit" class="btn btn-danger">Delete My Account!</button>

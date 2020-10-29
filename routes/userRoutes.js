@@ -3,14 +3,22 @@ const authController = require('./../controllers/authController');
 
 const router = express.Router();
 
-router.post('/signup', authController.signup);
+router.post('/signup',  
+  authController.uploadUserPhoto,
+  authController.resizeUserPhoto,
+  authController.signup);
 router.post('/login', authController.login);
 router.get('/logout', authController.isLoggedIn,authController.logout);
+
+router.get('/:id/addProviderData',authController.providerDataForm);
 
 router
 .route('/:id/profile')
 .get(authController.isLoggedIn,authController.userProfile)
-.delete(authController.isLoggedIn,authController.deleteUser);
+.delete(authController.isLoggedIn,authController.deleteUser)
+.put(authController.addProviderData);
+
+
 
 /*router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
